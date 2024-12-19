@@ -71,6 +71,7 @@ scissorsButton.textContent = "Scissors";
 scissorsButton.addEventListener("click", () => playRound("scissors"));
 
 const resultMessage = document.createElement("p");
+resultMessage.innerText = "Select rock, paper, or scissors to begin!"
 
 const playerScore = document.createElement("p");
 playerScore.textContent = "Score: " + humanScore;
@@ -86,7 +87,7 @@ scoreContainer.appendChild(resultMessage);
 
 const mainContainer = document.querySelector(".container");
 
+mainContainer.appendChild(scoreContainer);
 mainContainer.appendChild(rockButton);
 mainContainer.appendChild(paperButton);
 mainContainer.appendChild(scissorsButton);
-mainContainer.appendChild(scoreContainer);
