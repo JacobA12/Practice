@@ -10,39 +10,39 @@ function getComputerChoice() {
 
 function playRound(playerChoice) {
   const computerChoice = getComputerChoice();
-  let resultMessage = "";
+  let message = "";
 
   switch (computerChoice) {
     case "rock":
       if (playerChoice === "paper") {
-        resultMessage = "You win paper beats rock!";
+        message = "You win paper beats rock!";
         humanScore++;
       } else if (playerChoice === "rock") {
-        resultMessage = "It's a tie!";
+        message = "It's a tie!";
       } else {
-        resultMessage = "You lose, rock beats scissors";
+        message = "You lose, rock beats scissors";
         computerScore++;
       }
       break;
     case "paper":
       if (playerChoice === "scissors") {
-        resultMessage = "You win, scissors beats paper";
+        message = "You win, scissors beats paper";
         humanScore++;
       } else if (playerChoice === "rock") {
-        resultMessage = "You lose, paper beats rock";
+        message = "You lose, paper beats rock";
         computerScore++;
       } else {
-        resultMessage = "Its a tie!";
+        message = "Its a tie!";
       }
       break;
     case "scissors":
       if (playerChoice === "scissors") {
-        resultMessage = "It's a tie";
+        message = "It's a tie";
       } else if (playerChoice === "rock") {
-        resultMessage = "You win, rock beats scissors";
+        message = "You win, rock beats scissors";
         humanScore++;
       } else {
-        resultMessage = "You lose, scissors beats paper";
+        message = "You lose, scissors beats paper";
         computerScore++;
       }
       break;
@@ -50,10 +50,9 @@ function playRound(playerChoice) {
       console.error("default case reached");
       return;
   }
-  console.log(resultMessage);
-  console.log("Your score: " + humanScore);
-  console.log("Computer score: " + computerScore);
-  console.log("\n");
+  resultMessage.innerText = message;
+  playerScore.textContent = "Score: " + humanScore;
+  compScore.textContent = "Computer score: " + computerScore;
 }
 
 const rockButton = document.createElement("button");
@@ -71,8 +70,23 @@ scissorsButton.className = "scissorsButton";
 scissorsButton.textContent = "Scissors";
 scissorsButton.addEventListener("click", () => playRound("scissors"));
 
+const resultMessage = document.createElement("p");
+
+const playerScore = document.createElement("p");
+playerScore.textContent = "Score: " + humanScore;
+
+const compScore = document.createElement("p");
+compScore.textContent = "Computer score: " + computerScore;
+
+const scoreContainer = document.createElement("div");
+scoreContainer.className = "scoreContainer";
+scoreContainer.appendChild(playerScore);
+scoreContainer.appendChild(compScore);
+scoreContainer.appendChild(resultMessage);
+
 const mainContainer = document.querySelector(".container");
 
 mainContainer.appendChild(rockButton);
 mainContainer.appendChild(paperButton);
 mainContainer.appendChild(scissorsButton);
+mainContainer.appendChild(scoreContainer);
