@@ -53,6 +53,39 @@ function playRound(playerChoice) {
   resultMessage.innerText = message;
   playerScore.textContent = "Score: " + humanScore;
   compScore.textContent = "Computer score: " + computerScore;
+
+  if (humanScore === 5) {
+    resultMessage.innerText = "You were first to 5!";
+  }
+  if (computerScore === 5) {
+    resultMessage.innerText = "You lose, the computer was first to 5!";
+  }
+
+  if (humanScore === 5 || computerScore === 5) {
+    mainContainer.removeChild(rockButton);
+    mainContainer.removeChild(scissorsButton);
+    mainContainer.removeChild(paperButton);
+
+    const tryAgain = document.createElement("button");
+    tryAgain.innerText = "Try Again";
+
+    tryAgain.addEventListener("click", () => {
+      humanScore = 0;
+      computerScore = 0;
+
+      resultMessage.innerText = "Good Luck!";
+      playerScore.textContent = "Score: " + humanScore;
+      compScore.textContent = "Computer score: " + computerScore;
+
+      mainContainer.removeChild(tryAgain);
+      mainContainer.appendChild(rockButton);
+      mainContainer.appendChild(scissorsButton);
+      mainContainer.appendChild(paperButton);
+    });
+
+    mainContainer.appendChild(tryAgain);
+    return;
+  }
 }
 
 const rockButton = document.createElement("button");
@@ -71,7 +104,7 @@ scissorsButton.textContent = "Scissors";
 scissorsButton.addEventListener("click", () => playRound("scissors"));
 
 const resultMessage = document.createElement("p");
-resultMessage.innerText = "Select rock, paper, or scissors to begin!"
+resultMessage.innerText = "Select rock, paper, or scissors to begin!";
 
 const playerScore = document.createElement("p");
 playerScore.textContent = "Score: " + humanScore;
